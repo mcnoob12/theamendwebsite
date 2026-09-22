@@ -111,19 +111,25 @@
 <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1632370/t/5"></script>
     </main>
 
-    <div class="controls" aria-label="Display controls">
-      <label for="theme-color">Theme color
-        <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
-        <span class="control-value" id="theme-color-value">0&deg;</span>
-      </label>
-      <label for="contrast">Contrast
-        <input type="range" id="contrast" min="50" max="200" value="100" step="1">
-        <span class="control-value" id="contrast-value">100%</span>
-      </label>
-      <label for="brightness">Brightness
-        <input type="range" id="brightness" min="20" max="200" value="100" step="1">
-        <span class="control-value" id="brightness-value">100%</span>
-      </label>
+    <div class="controls" id="controls" aria-label="Display controls">
+      <div class="controls-header">
+        <span class="controls-title">Controls</span>
+        <button type="button" class="controls-cancel" id="controls-cancel" aria-label="Minimize controls" title="Minimize">&#8211;</button>
+      </div>
+      <div class="controls-body" id="controls-body">
+        <label for="theme-color">Theme color
+          <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
+          <span class="control-value" id="theme-color-value">0&deg;</span>
+        </label>
+        <label for="contrast">Contrast
+          <input type="range" id="contrast" min="50" max="200" value="100" step="1">
+          <span class="control-value" id="contrast-value">100%</span>
+        </label>
+        <label for="brightness">Brightness
+          <input type="range" id="brightness" min="20" max="200" value="200" step="1">
+          <span class="control-value" id="brightness-value">200%</span>
+        </label>
+      </div>
     </div>
 
     <script>
@@ -212,6 +218,17 @@
         contrastInput.addEventListener('input', applyTheme);
         brightnessInput.addEventListener('input', applyTheme);
         applyTheme();
+
+        // Minimize / expand the controls panel.
+        var cancelBtn = document.getElementById('controls-cancel');
+        var controls = document.getElementById('controls');
+        var body = document.getElementById('controls-body');
+        cancelBtn.addEventListener('click', function () {
+          var minimized = controls.classList.toggle('is-minimized');
+          body.hidden = minimized;
+          cancelBtn.textContent = minimized ? '+' : '\u2013';
+          cancelBtn.setAttribute('aria-label', minimized ? 'Expand controls' : 'Minimize controls');
+        });
       })();
     </script>
   </body>

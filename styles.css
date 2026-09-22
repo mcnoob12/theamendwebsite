@@ -490,6 +490,56 @@ h1 {
   gap: 6px;
 }
 
+.controls-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.controls-title {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+}
+
+.controls-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.controls-cancel:hover,
+.controls-cancel:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Minimized state: collapse the body, shrink the panel */
+.controls.is-minimized {
+  min-width: 0;
+  width: auto;
+}
+
+.controls.is-minimized .controls-header {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
 .controls .control-value {
   color: var(--green);
   font-weight: 700;
