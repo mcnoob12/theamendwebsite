@@ -6,15 +6,14 @@
     <title>Amend.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#" aria-label="Amend. home">
+        <img class="brand-logo" src="assets/logo-256.png" alt="Amend. logo">
         <span class="brand-wordmark">Amend.</span>
       </a>
 
@@ -23,13 +22,14 @@
         <a href="#projects">Projects</a>
         <a href="#mission">Mission</a>
         <a href="#contact">Contact</a>
+        <span class="menu-cursor" aria-hidden="true"></span>
       </nav>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <h1 id="hero-title">Amend.</h1>
+          <img class="hero-logo" src="assets/logo-1280.png" alt="Amend." id="hero-title">
           <p class="hero-subtitle">Technology, Distinctly Human.</p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button button-primary" href="#projects">View projects</a>
@@ -41,8 +41,8 @@
           <svg class="crisis-graph" viewBox="0 0 420 320" role="img">
             <line class="graph-axis" x1="48" y1="276" x2="382" y2="276"></line>
             <line class="graph-axis" x1="48" y1="276" x2="48" y2="38"></line>
-            <line class="graph-line graph-line-human" x1="48" y1="276" x2="336" y2="97.2"></line>
-            <path class="graph-line graph-line-values" d="M 48 276 C 140 276, 204 264, 218 196 C 224 166, 226 112, 216 58"></path>
+            <path class="graph-line graph-line-human" d="M 48 276 H 112 V 210 H 176 V 180 H 240 V 138 H 288 V 111 H 336 V 97"></path>
+            <path class="graph-line graph-line-values" d="M 48 276 H 96 V 268 H 144 V 240 H 166 V 196 H 186 V 158 H 204 V 96 H 216 V 58"></path>
           </svg>
           <div class="graph-legend">
             <span class="legend-item"><span class="legend-dot legend-dot-values"></span>values</span>
@@ -110,5 +110,109 @@
        <a href='http://www.freevisitorcounters.com'>User Counter</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=dabf2716cbe0118328e2a42e18aaba85140b905e'></script>
 <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1632370/t/5"></script>
     </main>
+
+    <div class="controls" aria-label="Display controls">
+      <label for="theme-color">Theme color
+        <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
+        <span class="control-value" id="theme-color-value">0&deg;</span>
+      </label>
+      <label for="contrast">Contrast
+        <input type="range" id="contrast" min="50" max="200" value="100" step="1">
+        <span class="control-value" id="contrast-value">100%</span>
+      </label>
+      <label for="brightness">Brightness
+        <input type="range" id="brightness" min="20" max="200" value="100" step="1">
+        <span class="control-value" id="brightness-value">100%</span>
+      </label>
+    </div>
+
+    <script>
+      (function () {
+        function hsvToHex(h, s, v) {
+          // h in [0,360], s/v in [0,1] -> #rrggbb
+          var c = v * s;
+          var x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+          var m = v - c;
+          var r = 0, g = 0, b = 0;
+          if (h < 60)      { r = c; g = x; }
+          else if (h < 120){ r = x; g = c; }
+          else if (h < 180){ g = c; b = x; }
+          else if (h < 240){ g = x; b = c; }
+          else if (h < 300){ r = x; b = c; }
+          else             { r = c; b = x; }
+          r = Math.round((r + m) * 255);
+          g = Math.round((g + m) * 255);
+          b = Math.round((b + m) * 255);
+          return '#' + [r, g, b].map(function (n) {
+            return n.toString(16).padStart(2, '0');
+          }).join('');
+        }
+
+        function mix(hex, other, t) {
+          // t in [0,1] -> blend hex toward other
+          var p = [1, 3, 5].map(function (i) {
+            return parseInt(hex.slice(i, i + 2), 16);
+          });
+          var q = [1, 3, 5].map(function (i) {
+            return parseInt(other.slice(i, i + 2), 16);
+          });
+          var m = p.map(function (c, i) {
+            return Math.round(c + (q[i] - c) * t);
+          });
+          return '#' + m.map(function (v) {
+            return v.toString(16).padStart(2, '0');
+          }).join('');
+        }
+
+        var root = document.documentElement;
+        var hueInput = document.getElementById('theme-color');
+        var contrastInput = document.getElementById('contrast');
+        var brightnessInput = document.getElementById('brightness');
+        var hueValue = document.getElementById('theme-color-value');
+        var contrastValue = document.getElementById('contrast-value');
+        var brightnessValue = document.getElementById('brightness-value');
+
+        // Base C64 BASIC-prompt accent hues (deg) from the current theme.
+        var base = {
+          ink: 231,       // light lavender-blue text
+          muted: 233,
+          green: 120,     // light-green
+          blue: 250
+        };
+
+        function applyTheme() {
+          var hue = parseInt(hueInput.value, 10);
+          var contrast = parseInt(contrastInput.value, 10);
+          var brightness = parseInt(brightnessInput.value, 10);
+
+          // Rebuild accent colors by shifting each accent's hue angle.
+          var ink = hsvToHex((base.ink + hue) % 360, 0.38, 0.99);
+          var muted = hsvToHex((base.muted + hue) % 360, 0.28, 0.92);
+          var green = hsvToHex((base.green + hue) % 360, 0.45, 0.90);
+          var blue = hsvToHex((base.blue + hue) % 360, 0.32, 0.82);
+
+          root.style.setProperty('--ink', ink);
+          root.style.setProperty('--muted', muted);
+          root.style.setProperty('--green', green);
+          root.style.setProperty('--blue', blue);
+
+          // Contrast: filter on the whole page (except the controls).
+          var filter = 'contrast(' + contrast + '%)';
+          root.style.setProperty('--page-contrast', filter);
+
+          // Brightness: applied to the background layer only.
+          root.style.setProperty('--bg-brightness', brightness + '%');
+
+          hueValue.textContent = hue + '\u00b0';
+          contrastValue.textContent = contrast + '%';
+          brightnessValue.textContent = brightness + '%';
+        }
+
+        hueInput.addEventListener('input', applyTheme);
+        contrastInput.addEventListener('input', applyTheme);
+        brightnessInput.addEventListener('input', applyTheme);
+        applyTheme();
+      })();
+    </script>
   </body>
 </html>
