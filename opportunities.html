@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Opportunities archive — Amend.</title>
+    <meta name="description" content="Opportunities archived by Amend.">
+    <link rel="preload" href="assets/fonts/ChicagoFLF.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="menubar">
+      <a class="brand" href="index.html" aria-label="Amend. home">
+        <img src="assets/logo-mac-small.png" alt="" width="80" height="25">
+      </a>
+      <nav class="menu" aria-label="Primary navigation">
+        <a href="index.html#who-we-are">Who we are</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="opportunities.html" aria-current="page">Opportunities</a>
+        <a href="index.html#mission">Mission</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="desktop">
+      <section class="window window-wide window-page" id="opportunities" aria-labelledby="opp-title">
+        <div class="titlebar">
+          <span class="closebox" aria-hidden="true"></span>
+          <h1 class="window-title" id="opp-title">Opportunities archive</h1>
+          <span class="zoombox zoombox-red" aria-hidden="true"></span>
+        </div>
+        <div class="window-body">
+          <p class="lede">Opportunities, archived.</p>
+          <p class="opp-status" id="opp-status" role="status" hidden></p>
+          <div class="opp-adminbar" id="opp-adminbar" hidden>
+            <span class="opp-adminbar-label">Admin mode</span>
+            <button type="button" class="button button-primary" id="opp-add">Add entry</button>
+            <button type="button" class="button" id="opp-lock">Lock</button>
+          </div>
+          <div class="opp-grid" id="opp-grid" aria-live="polite"></div>
+          <p class="opp-empty" id="opp-empty" hidden>Nothing archived yet. Check back soon.</p>
+          <button type="button" class="opp-admin-link" id="opp-admin-link">Admin</button>
+        </div>
+      </section>
+
+      <a class="back-link" href="index.html">Back to Amend.</a>
+    </main>
+
+    <dialog class="opp-dialog" id="opp-dialog" aria-labelledby="opp-dialog-title">
+      <div class="dialog-frame">
+        <div class="titlebar">
+          <button type="button" class="closebox" id="opp-dialog-close" aria-label="Close"></button>
+          <span class="window-title" id="opp-dialog-title">Admin</span>
+        </div>
+
+        <!-- Unlock: enter the admin password -->
+        <form class="opp-form" id="opp-unlock-form" data-title="Unlock" hidden>
+          <label>Password
+            <input type="password" name="password" autocomplete="current-password" required>
+          </label>
+          <p class="opp-form-error" role="alert"></p>
+          <div class="opp-form-actions">
+            <button type="button" class="opp-text-btn" id="opp-show-setup">Token expired? Run setup again</button>
+            <button type="submit" class="button button-primary">Unlock</button>
+          </div>
+        </form>
+
+        <!-- One-time setup: store a GitHub token encrypted with your password -->
+        <form class="opp-form" id="opp-setup-form" data-title="First-time setup" hidden>
+          <div class="opp-help">
+            <p>Create a GitHub fine-grained token so this page can save entries to the repo:</p>
+            <ol>
+              <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a></li>
+              <li>Repository access: <b>Only select repositories</b> &rarr; <b>theamendwebsite</b></li>
+              <li>Permissions &rarr; Repository &rarr; <b>Contents: Read and write</b></li>
+              <li>Generate, then paste it below.</li>
+            </ol>
+            <p>The token is encrypted with your password before it is saved. Only someone with the password can use it.</p>
+          </div>
+          <label>GitHub token
+            <input type="password" name="token" autocomplete="off" spellcheck="false" required>
+          </label>
+          <label>Choose a password (12+ characters)
+            <input type="password" name="password" autocomplete="new-password" minlength="12" required>
+          </label>
+          <label>Confirm password
+            <input type="password" name="confirm" autocomplete="new-password" minlength="12" required>
+          </label>
+          <p class="opp-form-error" role="alert"></p>
+          <div class="opp-form-actions">
+            <button type="submit" class="button button-primary">Save setup</button>
+          </div>
+        </form>
+
+        <!-- New entry -->
+        <form class="opp-form" id="opp-entry-form" data-title="New entry" hidden>
+          <label>Name
+            <input type="text" name="name" maxlength="140" required>
+          </label>
+          <label>Image
+            <input type="file" name="image" accept="image/*">
+          </label>
+          <img class="opp-preview" id="opp-preview" alt="" hidden>
+          <label>Details
+            <textarea name="details" rows="5" maxlength="4000" required></textarea>
+          </label>
+          <label>Venue
+            <input type="text" name="venue" maxlength="200" required>
+          </label>
+          <label>Timing
+            <input type="text" name="timing" maxlength="200" placeholder="e.g. 12&ndash;14 Dec 2026, 10am&ndash;4pm" required>
+          </label>
+          <p class="opp-form-error" role="alert"></p>
+          <div class="opp-form-actions">
+            <button type="submit" class="button button-primary">Publish</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <aside class="window controls" id="controls" aria-label="Control panel">
+      <div class="titlebar">
+        <button type="button" class="closebox" id="controls-cancel" aria-label="Minimize control panel" aria-expanded="true"></button>
+        <span class="window-title">Control Panel</span>
+      </div>
+      <div class="controls-body" id="controls-body">
+        <label for="theme-color">Accent color
+          <span class="control-row">
+            <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
+            <span class="control-value" id="theme-color-value">0&deg;</span>
+          </span>
+        </label>
+        <label for="contrast">Contrast
+          <span class="control-row">
+            <input type="range" id="contrast" min="50" max="200" value="100" step="1">
+            <span class="control-value" id="contrast-value">100%</span>
+          </span>
+        </label>
+        <label for="brightness">Desktop brightness
+          <span class="control-row">
+            <input type="range" id="brightness" min="20" max="200" value="100" step="1">
+            <span class="control-value" id="brightness-value">100%</span>
+          </span>
+        </label>
+      </div>
+    </aside>
+
+    <script src="site.js"></script>
+    <script src="opportunities.js" defer></script>
+  </body>
+</html>

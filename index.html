@@ -4,232 +4,228 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Amend.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <meta name="description" content="Amend. — Technology, distinctly human.">
+    <link rel="preload" href="assets/fonts/ChicagoFLF.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      // Hide the hero window until the opening "zoom" animation runs.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('zoom-pending');
+      }
+    </script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#" aria-label="Amend. home">
-        <img class="brand-logo" src="assets/logo-256.png" alt="Amend. logo">
-        <span class="brand-wordmark">Amend.</span>
-      </a>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="icon-doc" viewBox="0 0 16 20">
+        <path d="M1 1h9l5 5v13H1z" fill="#fff" stroke="#000" stroke-width="2"/>
+        <path d="M10 1v5h5" fill="none" stroke="#000" stroke-width="2"/>
+      </symbol>
+      <symbol id="icon-folder" viewBox="0 0 20 16">
+        <path d="M1 3h6l2 2h10v10H1z" fill="#fff" stroke="#000" stroke-width="2"/>
+        <path d="M1 7h18" fill="none" stroke="#000" stroke-width="2"/>
+      </symbol>
+    </svg>
 
-      <nav class="site-nav" aria-label="Primary navigation">
+    <header class="menubar">
+      <a class="brand" href="#top" aria-label="Amend. home">
+        <img src="assets/logo-mac-small.png" alt="" width="80" height="25">
+      </a>
+      <nav class="menu" aria-label="Primary navigation">
         <a href="#who-we-are">Who we are</a>
         <a href="#projects">Projects</a>
+        <a href="opportunities.html">Opportunities</a>
         <a href="#mission">Mission</a>
         <a href="#contact">Contact</a>
-        <span class="menu-cursor" aria-hidden="true"></span>
       </nav>
     </header>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <img class="hero-logo" src="assets/logo-1280.png" alt="Amend." id="hero-title">
-          <p class="hero-subtitle">Technology, Distinctly Human.</p>
-          <div class="hero-actions" aria-label="Primary actions">
-            <a class="button button-primary" href="#projects">View projects</a>
-            <a class="button button-secondary" href="#contact">Get in touch</a>
-          </div>
-        </div>
+    <main class="desktop" id="top">
 
-        <div class="hero-visual" aria-hidden="true">
-          <svg class="crisis-graph" viewBox="0 0 420 320" role="img">
-            <line class="graph-axis" x1="48" y1="276" x2="382" y2="276"></line>
-            <line class="graph-axis" x1="48" y1="276" x2="48" y2="38"></line>
-            <path class="graph-line graph-line-human" d="M 48 276 H 112 V 210 H 176 V 180 H 240 V 138 H 288 V 111 H 336 V 97"></path>
-            <path class="graph-line graph-line-values" d="M 48 276 H 96 V 268 H 144 V 240 H 166 V 196 H 186 V 158 H 204 V 96 H 216 V 58"></path>
-          </svg>
-          <div class="graph-legend">
-            <span class="legend-item"><span class="legend-dot legend-dot-values"></span>values</span>
-            <span class="legend-item"><span class="legend-dot legend-dot-human"></span>human-centered systems</span>
+      <div class="hero">
+        <section class="window window-hero" aria-labelledby="hero-title">
+          <div class="titlebar">
+            <span class="closebox" aria-hidden="true"></span>
+            <span class="window-title">Amend.</span>
           </div>
-        </div>
-      </section>
+          <div class="window-body">
+            <h1 class="hero-logo" id="hero-title">
+              <img src="assets/logo-mac.png" alt="Amend." width="1600" height="492">
+            </h1>
+            <p class="hero-subtitle">Technology, distinctly human.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#projects">View projects</a>
+              <a class="button" href="#contact">Get in touch</a>
+            </div>
+          </div>
+        </section>
 
-      <section class="content-section" id="who-we-are">
-        <div class="section-inner">
-          <p class="section-kicker">Who we are</p>
-          <h2>An idealistic and dreamy Future Technology Corporation.</h2>
-          <p style="padding-top: 40px;">
-            Amend. is forming around the belief that useful technology should
-            feel clear, thoughtful, and close to real human needs.
-          </p>
-          <hr>
+        <figure class="window window-chart" aria-label="Chart: values versus human-centered systems">
+          <div class="titlebar">
+            <span class="closebox" aria-hidden="true"></span>
+            <span class="window-title">Values chart</span>
+            <span class="zoombox zoombox-cyan" aria-hidden="true"></span>
+          </div>
+          <div class="window-body chart-body">
+            <svg class="chart" viewBox="0 0 420 300" aria-hidden="true">
+              <defs>
+                <pattern id="dither" width="4" height="4" patternUnits="userSpaceOnUse">
+                  <rect width="2" height="2" fill="#000"/>
+                  <rect x="2" y="2" width="2" height="2" fill="#000"/>
+                </pattern>
+              </defs>
+              <g class="chart-ticks">
+                <line x1="40" y1="60" x2="46" y2="60"/><line x1="40" y1="120" x2="46" y2="120"/>
+                <line x1="40" y1="180" x2="46" y2="180"/><line x1="40" y1="240" x2="46" y2="240"/>
+                <line x1="110" y1="270" x2="110" y2="276"/><line x1="180" y1="270" x2="180" y2="276"/>
+                <line x1="250" y1="270" x2="250" y2="276"/><line x1="320" y1="270" x2="320" y2="276"/>
+              </g>
+              <path class="chart-axis" d="M46 20 V270 H400"/>
+              <path class="chart-line chart-line-human" d="M46 270 H112 V210 H176 V180 H240 V138 H288 V111 H336 V97 H392"/>
+              <path class="chart-line chart-line-values" d="M46 270 H96 V262 H144 V234 H166 V190 H186 V152 H204 V90 H216 V40"/>
+            </svg>
+            <figcaption class="chart-legend">
+              <span><span class="swatch swatch-values"></span>Values</span>
+              <span><span class="swatch swatch-human"></span>Human-centered systems</span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+
+      <section class="window" id="who-we-are" aria-labelledby="who-title">
+        <div class="titlebar">
+          <span class="closebox" aria-hidden="true"></span>
+          <h2 class="window-title" id="who-title">Who we are</h2>
+          <span class="zoombox zoombox-green" aria-hidden="true"></span>
+        </div>
+        <div class="window-body">
+          <p class="lede">An idealistic and dreamy Future Technology Corporation.</p>
+          <p>Amend. is forming around the belief that useful technology should feel clear, thoughtful, and close to real human needs.</p>
           <p>We're a small team right now, trying to make a change in this world. Maybe we'll succeed, maybe we won't.</p>
-          <hr>
-          <p>Time will tell.</p>
-          <hr>
+          <p class="signoff">Time will tell.</p>
         </div>
       </section>
 
-      <section class="content-section" id="projects">
-        <div class="section-inner">
-          <p class="section-kicker">Projects</p>
-          <h2>Ideas in motion.</h2>
-          <p id="project_introduction">Project CTW: Connect The World [Free, in-depth guides]</p>
-          <p class="project_link">
-            <hr>
-            <a href="https://dusty-workshop-b12.notion.site/Walking-you-through-US-college-Apps-3c3656469ba28035abadd67458f427ac?pvs=74">>>> Walking you through US College Applications</a> <hr>
-                        <a href="https://dusty-workshop-b12.notion.site/Transitioning-to-the-SAT-as-a-JEE-Aspirant-3c0656469ba280358d7bc47eb70c6521?pvs=73">>>> Transitioning to the SAT as a JEE Aspirant</a>
-          <hr>
-                      </p>
+      <section class="window" id="projects" aria-labelledby="projects-title">
+        <div class="titlebar">
+          <span class="closebox" aria-hidden="true"></span>
+          <h2 class="window-title" id="projects-title">Projects</h2>
+          <span class="zoombox zoombox-yellow" aria-hidden="true"></span>
+        </div>
+        <div class="window-body">
+          <p class="lede">Ideas in motion.</p>
+          <div class="folder">
+            <div class="folder-head">
+              <h3>Project CTW: Connect The World</h3>
+              <span class="folder-note">Free, in-depth guides</span>
+            </div>
+            <ul class="file-list">
+              <li>
+                <a href="https://dusty-workshop-b12.notion.site/Walking-you-through-US-college-Apps-3c3656469ba28035abadd67458f427ac?pvs=74">
+                  <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                  <span>Walking you through US College Applications</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://dusty-workshop-b12.notion.site/Transitioning-to-the-SAT-as-a-JEE-Aspirant-3c0656469ba280358d7bc47eb70c6521?pvs=73">
+                  <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                  <span>Transitioning to the SAT as a JEE Aspirant</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <section class="content-section" id="mission">
-        <div class="section-inner">
-          <p class="section-kicker">Mission</p>
-          <h2>Technology, with people kept at the center.</h2>
-          <p>
-            The mission is simple: Amend. the way technology is imagined,
-            designed, and experienced so it serves people with more care.
-            <hr>
-            We aspire to be the anti corporate-greed, privacy centric, and value driven alternative to big tech.
-          </p>
+      <section class="window" id="opportunities" aria-labelledby="opp-title">
+        <div class="titlebar">
+          <span class="closebox" aria-hidden="true"></span>
+          <h2 class="window-title" id="opp-title">Opportunities archive</h2>
+          <span class="zoombox zoombox-red" aria-hidden="true"></span>
+        </div>
+        <div class="window-body">
+          <p class="lede">Opportunities, archived.</p>
+          <ul class="file-list">
+            <li>
+              <a href="opportunities.html">
+                <svg class="doc-icon folder-icon"><use href="#icon-folder"/></svg>
+                <span>Open the opportunities archive</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
-      <section class="content-section" id="contact">
-        <div class="section-inner">
-          <p class="section-kicker">Contact</p>
-          <h2>Tell us more.</h2>
-   
-          <p class="project_link">
-            <hr>
-            <a href="https://www.linkedin.com/company/amend-project/ ">>>> LinkedIN</a> <hr>
-                        <a href="mailto:aryankrjha.1235@gmail.com">>>> E-Mail</a>
-          <hr>
-                      </p>
+      <section class="window" id="mission" aria-labelledby="mission-title">
+        <div class="titlebar">
+          <span class="closebox" aria-hidden="true"></span>
+          <h2 class="window-title" id="mission-title">Mission</h2>
+          <span class="zoombox zoombox-purple" aria-hidden="true"></span>
+        </div>
+        <div class="window-body">
+          <p class="lede">Technology, with people kept at the center.</p>
+          <p>The mission is simple: Amend. the way technology is imagined, designed, and experienced so it serves people with more care.</p>
+          <p>We aspire to be the anti corporate-greed, privacy centric, and value driven alternative to big tech.</p>
         </div>
       </section>
-       <a href='http://www.freevisitorcounters.com'>User Counter</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=dabf2716cbe0118328e2a42e18aaba85140b905e'></script>
+
+      <section class="window" id="contact" aria-labelledby="contact-title">
+        <div class="titlebar">
+          <span class="closebox" aria-hidden="true"></span>
+          <h2 class="window-title" id="contact-title">Contact</h2>
+          <span class="zoombox zoombox-green" aria-hidden="true"></span>
+        </div>
+        <div class="window-body">
+          <p class="lede">Tell us more.</p>
+          <ul class="file-list">
+            <li>
+              <a href="https://www.linkedin.com/company/amend-project/">
+                <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:aryankrjha.1235@gmail.com">
+                <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                <span>E-mail</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <a href='http://www.freevisitorcounters.com'>User Counter</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=dabf2716cbe0118328e2a42e18aaba85140b905e'></script>
 <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1632370/t/5"></script>
+      </footer>
     </main>
 
-    <div class="controls" id="controls" aria-label="Display controls">
-      <div class="controls-header">
-        <span class="controls-title">Controls</span>
-        <button type="button" class="controls-cancel" id="controls-cancel" aria-label="Minimize controls" title="Minimize">&#8211;</button>
+    <aside class="window controls" id="controls" aria-label="Control panel">
+      <div class="titlebar">
+        <button type="button" class="closebox" id="controls-cancel" aria-label="Minimize control panel" aria-expanded="true"></button>
+        <span class="window-title">Control Panel</span>
       </div>
       <div class="controls-body" id="controls-body">
-        <label for="theme-color">Theme color
-          <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
-          <span class="control-value" id="theme-color-value">0&deg;</span>
+        <label for="theme-color">Accent color
+          <span class="control-row">
+            <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
+            <span class="control-value" id="theme-color-value">0&deg;</span>
+          </span>
         </label>
         <label for="contrast">Contrast
-          <input type="range" id="contrast" min="50" max="200" value="100" step="1">
-          <span class="control-value" id="contrast-value">100%</span>
+          <span class="control-row">
+            <input type="range" id="contrast" min="50" max="200" value="100" step="1">
+            <span class="control-value" id="contrast-value">100%</span>
+          </span>
         </label>
-        <label for="brightness">Brightness
-          <input type="range" id="brightness" min="20" max="200" value="200" step="1">
-          <span class="control-value" id="brightness-value">200%</span>
+        <label for="brightness">Desktop brightness
+          <span class="control-row">
+            <input type="range" id="brightness" min="20" max="200" value="100" step="1">
+            <span class="control-value" id="brightness-value">100%</span>
+          </span>
         </label>
       </div>
-    </div>
+    </aside>
 
-    <script>
-      (function () {
-        function hsvToHex(h, s, v) {
-          // h in [0,360], s/v in [0,1] -> #rrggbb
-          var c = v * s;
-          var x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-          var m = v - c;
-          var r = 0, g = 0, b = 0;
-          if (h < 60)      { r = c; g = x; }
-          else if (h < 120){ r = x; g = c; }
-          else if (h < 180){ g = c; b = x; }
-          else if (h < 240){ g = x; b = c; }
-          else if (h < 300){ r = x; b = c; }
-          else             { r = c; b = x; }
-          r = Math.round((r + m) * 255);
-          g = Math.round((g + m) * 255);
-          b = Math.round((b + m) * 255);
-          return '#' + [r, g, b].map(function (n) {
-            return n.toString(16).padStart(2, '0');
-          }).join('');
-        }
-
-        function mix(hex, other, t) {
-          // t in [0,1] -> blend hex toward other
-          var p = [1, 3, 5].map(function (i) {
-            return parseInt(hex.slice(i, i + 2), 16);
-          });
-          var q = [1, 3, 5].map(function (i) {
-            return parseInt(other.slice(i, i + 2), 16);
-          });
-          var m = p.map(function (c, i) {
-            return Math.round(c + (q[i] - c) * t);
-          });
-          return '#' + m.map(function (v) {
-            return v.toString(16).padStart(2, '0');
-          }).join('');
-        }
-
-        var root = document.documentElement;
-        var hueInput = document.getElementById('theme-color');
-        var contrastInput = document.getElementById('contrast');
-        var brightnessInput = document.getElementById('brightness');
-        var hueValue = document.getElementById('theme-color-value');
-        var contrastValue = document.getElementById('contrast-value');
-        var brightnessValue = document.getElementById('brightness-value');
-
-        // Base C64 BASIC-prompt accent hues (deg) from the current theme.
-        var base = {
-          ink: 231,       // light lavender-blue text
-          muted: 233,
-          green: 120,     // light-green
-          blue: 250
-        };
-
-        function applyTheme() {
-          var hue = parseInt(hueInput.value, 10);
-          var contrast = parseInt(contrastInput.value, 10);
-          var brightness = parseInt(brightnessInput.value, 10);
-
-          // Rebuild accent colors by shifting each accent's hue angle.
-          var ink = hsvToHex((base.ink + hue) % 360, 0.38, 0.99);
-          var muted = hsvToHex((base.muted + hue) % 360, 0.28, 0.92);
-          var green = hsvToHex((base.green + hue) % 360, 0.45, 0.90);
-          var blue = hsvToHex((base.blue + hue) % 360, 0.32, 0.82);
-
-          root.style.setProperty('--ink', ink);
-          root.style.setProperty('--muted', muted);
-          root.style.setProperty('--green', green);
-          root.style.setProperty('--blue', blue);
-
-          // Contrast: filter on the whole page (except the controls).
-          var filter = 'contrast(' + contrast + '%)';
-          root.style.setProperty('--page-contrast', filter);
-
-          // Brightness: applied to the background layer only.
-          root.style.setProperty('--bg-brightness', brightness + '%');
-
-          hueValue.textContent = hue + '\u00b0';
-          contrastValue.textContent = contrast + '%';
-          brightnessValue.textContent = brightness + '%';
-        }
-
-        hueInput.addEventListener('input', applyTheme);
-        contrastInput.addEventListener('input', applyTheme);
-        brightnessInput.addEventListener('input', applyTheme);
-        applyTheme();
-
-        // Minimize / expand the controls panel.
-        var cancelBtn = document.getElementById('controls-cancel');
-        var controls = document.getElementById('controls');
-        var body = document.getElementById('controls-body');
-        cancelBtn.addEventListener('click', function () {
-          var minimized = controls.classList.toggle('is-minimized');
-          body.hidden = minimized;
-          cancelBtn.textContent = minimized ? '+' : '\u2013';
-          cancelBtn.setAttribute('aria-label', minimized ? 'Expand controls' : 'Minimize controls');
-        });
-      })();
-    </script>
+    <script src="site.js"></script>
   </body>
 </html>
