@@ -141,6 +141,38 @@
     return n;
   }
 
+  // Turns web addresses in plain text into links. Built from text nodes
+  // and elements (never innerHTML), so entry text can't inject markup.
+  var URL_RE = /\bhttps?:\/\/[^\s<>"'|]+/gi;
+  function linkify(parent, text) {
+    text = String(text || '');
+    var last = 0, m;
+    URL_RE.lastIndex = 0;
+    while ((m = URL_RE.exec(text))) {
+      var url = m[0];
+      // Leave sentence punctuation after the address out of the link,
+      // keeping a closing bracket only if the address opened one.
+      while (/[.,;:!?)\]]$/.test(url)) {
+        var ch = url.slice(-1);
+        if (ch === ')' && (url.split('(').length > url.split(')').length - 1)) break;
+        if (ch === ']' && (url.split('[').length > url.split(']').length - 1)) break;
+        url = url.slice(0, -1);
+      }
+      if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var a = document.createElement('a');
+      a.href = url;
+      a.textContent = url.replace(/^https?:\/\/(www\.)?/i, '').replace(/\/$/, '');
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.className = 'opp-link';
+      parent.appendChild(a);
+      last = m.index + url.length;
+      URL_RE.lastIndex = last;
+    }
+    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+    return parent;
+  }
+
   function noImage(label) {
     var box = el('div', 'opp-card-img opp-card-noimg');
     box.appendChild(el('span', null, label));
@@ -162,19 +194,17 @@
         img.loading = 'lazy';
         img.onerror = function () { img.replaceWith(noImage('Image unavailable')); };
         card.appendChild(img);
-      } else {
-        card.appendChild(noImage('No image'));
       }
 
       var body = el('div', 'opp-card-body');
       body.appendChild(el('h3', 'opp-card-name', entry.name));
-      body.appendChild(el('div', 'opp-card-details', entry.details));
+      body.appendChild(linkify(el('div', 'opp-card-details'), entry.details));
 
       var meta = el('dl', 'opp-card-meta');
       [['Venue', entry.venue], ['Timing', entry.timing]].forEach(function (pair) {
         if (!pair[1]) return;
         meta.appendChild(el('dt', null, pair[0]));
-        meta.appendChild(el('dd', null, pair[1]));
+        meta.appendChild(linkify(el('dd'), pair[1]));
       });
       body.appendChild(meta);
 

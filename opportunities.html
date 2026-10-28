@@ -7,6 +7,13 @@
     <meta name="description" content="Opportunities archived by Amend.">
     <link rel="preload" href="assets/fonts/ChicagoFLF.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      // Apply the saved appearance before first paint.
+      try {
+        var t = localStorage.getItem('amend-theme');
+        if (t === 'aqua' || t === 'aero') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <header class="menubar">
@@ -20,6 +27,11 @@
         <a href="index.html#mission">Mission</a>
         <a href="index.html#contact">Contact</a>
       </nav>
+      <div class="theme-switch" role="group" aria-label="Appearance">
+        <button type="button" data-theme-choice="classic" aria-pressed="true">Classic</button>
+        <button type="button" data-theme-choice="aqua" aria-pressed="false">Aqua</button>
+        <button type="button" data-theme-choice="aero" aria-pressed="false">Aero</button>
+      </div>
     </header>
 
     <main class="desktop">

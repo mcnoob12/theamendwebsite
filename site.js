@@ -2,6 +2,23 @@
 (function () {
   var root = document.documentElement;
 
+  /* ---- Appearance: Classic (System 6), Aqua (Mac OS X) or Aero (Frutiger Aero) ---- */
+  var themeButtons = document.querySelectorAll('[data-theme-choice]');
+  function setTheme(theme, save) {
+    if (theme === 'aqua' || theme === 'aero') root.setAttribute('data-theme', theme);
+    else { theme = 'classic'; root.removeAttribute('data-theme'); }
+    themeButtons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-choice') === theme));
+    });
+    if (save) {
+      try { localStorage.setItem('amend-theme', theme); } catch (e) {}
+    }
+  }
+  themeButtons.forEach(function (b) {
+    b.addEventListener('click', function () { setTheme(b.getAttribute('data-theme-choice'), true); });
+  });
+  setTheme(root.getAttribute('data-theme') || 'classic', false);
+
   /* ---- Control panel ---- */
   var hueInput = document.getElementById('theme-color');
   var contrastInput = document.getElementById('contrast');
