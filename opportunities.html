@@ -6,6 +6,15 @@
     <title>Opportunities archive — Amend.</title>
     <meta name="description" content="Opportunities archived by Amend.">
     <link rel="stylesheet" href="styles.css">
+    <script>
+      // Agent view: a plain-text version of the page for AI agents.
+      // On with ?agent (or ?agent=1), off with ?agent=0, otherwise the saved choice.
+      try {
+        var q = new URLSearchParams(location.search).get('agent');
+        var agentOn = q !== null ? q !== '0' : localStorage.getItem('amend-agent') === '1';
+        if (agentOn) document.documentElement.classList.add('agent');
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -33,6 +42,10 @@
         <a href="opportunities.html" aria-current="page">Opportunities</a>
         <a href="index.html#contact">Contact</a>
       </nav>
+      <button type="button" class="agent-btn" id="agent-toggle" aria-pressed="false" title="Plain-text view for AI agents and screen readers">
+        <span class="agent-glyph" aria-hidden="true">{}</span>
+        Agent
+      </button>
       <button type="button" class="launch-btn" id="launch-btn" aria-expanded="false" aria-controls="launcher">
         <span class="launch-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         Launch
@@ -66,6 +79,8 @@
     </div>
 
     <main class="desktop">
+      <p class="agent-note">Agent view: a plain-text version of this page for AI agents and screen readers. Turn it off with the Agent button, or open the page with <code>?agent=0</code>.</p>
+
       <section class="window window-wide window-page" id="opportunities" aria-labelledby="opp-title">
         <div class="titlebar">
           <span class="pixel pixel-red" aria-hidden="true"></span>

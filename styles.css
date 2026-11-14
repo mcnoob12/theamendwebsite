@@ -169,7 +169,6 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  margin-left: auto;
   padding: 0 18px;
   color: var(--muted);
   border-left: var(--line);
@@ -1231,7 +1230,6 @@ button.winbtn:focus-visible { outline-offset: 1px; }
   display: none;
   align-items: center;
   gap: 10px;
-  margin-left: auto;
   padding: 0 16px;
   font: inherit;
   letter-spacing: .04em;
@@ -1542,6 +1540,310 @@ html.still { scroll-behavior: auto; }
 
 .site-footer a { color: var(--text); }
 
+/* ============================  AGENT TOGGLE  ============================ */
+.agent-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 0 16px;
+  font: inherit;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-left: var(--line);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.agent-btn:hover { color: var(--text); background: var(--surface-2); }
+.agent-btn:focus-visible { outline-offset: -3px; }
+
+.agent-glyph {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: -.05em;
+}
+
+.agent-note { display: none; }
+
+/* ============================  AGENT VIEW  ============================
+   Everything decorative goes; what's left is plain, linear text that
+   an AI agent (or a screen reader, or a printer) can read top to bottom. */
+html.agent {
+  color-scheme: light;
+  scroll-behavior: auto;
+}
+
+.agent body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+.agent body::before,
+.agent body::after,
+.agent .window::before,
+.agent .window::after { display: none; }
+
+.agent *,
+.agent *::before,
+.agent *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.agent a { color: #0645ad; }
+
+/* Hidden: pictures, chrome and toys. */
+.agent .pixel,
+.agent .winbtns,
+.agent .winbtn,
+.agent .statusbar,
+.agent .window-cube,
+.agent .chart,
+.agent .chart-legend > span,
+.agent .info-btn,
+.agent .desk-icons,
+.agent .sheet,
+.agent .launcher,
+.agent .launch-btn,
+.agent .clock,
+.agent .brand,
+.agent .app-icon,
+.agent .doc-icon,
+.agent .hero-logo img,
+.agent .opp-card-img,
+.agent .opp-admin-link,
+.agent .file-list a::after,
+.agent .menu a::before,
+.agent .window-body p.hero-subtitle::after { display: none !important; }
+
+/* Menu: a plain list of links. */
+.agent .menubar {
+  position: static;
+  flex-wrap: wrap;
+  height: auto;
+  padding: 12px 0;
+  font: inherit;
+  background: none;
+  border-bottom: 1px solid #ccc;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.agent .menu {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  overflow: visible;
+}
+
+.agent .menu a { padding: 0; color: #0645ad; text-decoration: underline; border: 0; }
+.agent .menu a:hover { background: none; }
+.agent .menu a[aria-current="page"] { color: #111; box-shadow: none; font-weight: 700; }
+
+.agent .agent-btn {
+  margin-left: auto;
+  padding: 2px 10px;
+  color: #111;
+  border: 1px solid #999;
+}
+.agent .agent-btn:hover { background: #eee; }
+.agent .agent-glyph { color: #111; }
+
+.agent .agent-note {
+  display: block;
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #f3f3f3;
+  border-left: 3px solid #111;
+}
+
+/* Layout: one column, no windows. */
+.agent .desktop {
+  display: block;
+  width: auto;
+  padding: 24px 0 0;
+  filter: none;
+}
+
+.agent .menubar { filter: none; }
+
+.agent .hero,
+.agent .row,
+.agent .stack,
+.agent .hero-side,
+.agent .apps,
+.agent .opp-grid { display: block; margin: 0; }
+
+.agent .window,
+.agent .app,
+.agent .opp-card {
+  margin: 0 0 28px;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.agent.zoom-pending .window-hero { visibility: visible; }
+.agent .window-hero .titlebar { display: none; }
+
+.agent .titlebar,
+.agent .app-head,
+.agent .app-body,
+.agent .opp-card-body,
+.agent .window-body,
+.agent .window-hero .window-body,
+.agent .chart-body {
+  display: block;
+  height: auto;
+  padding: 0;
+  color: inherit;
+  background: none;
+  border: 0;
+}
+
+/* Section titles read as headings. */
+.agent .window-title {
+  display: block;
+  margin: 28px 0 8px;
+  font: 700 13px/1.3 system-ui, -apple-system, sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #555;
+  white-space: normal;
+}
+
+.agent .hero-logo { margin: 0 0 4px; font-size: 40px; }
+.agent .hero-logo::before { content: "Amend."; }
+
+.agent .lede,
+.agent .window-body p.hero-subtitle,
+.agent .app-name,
+.agent .opp-card-name {
+  margin: 0 0 12px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: #111;
+}
+
+.agent .app-name,
+.agent .opp-card-name { font-size: 21px; margin: 0; }
+
+.agent .window-body p:not(.lede),
+.agent .window-body .app-body p,
+.agent .examples span,
+.agent .opp-card-details,
+.agent .opp-card-meta,
+.agent .opp-help {
+  max-width: none;
+  font-size: 17px;
+  color: #111;
+}
+
+.agent .window-body p.kicker,
+.agent .badge,
+.agent .app-meta,
+.agent .app-note {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #555;
+  background: none;
+  border: 0;
+}
+
+.agent .badges { display: block; margin: 2px 0 8px; }
+.agent .badges::before { content: "Status: "; font-size: 14px; color: #555; }
+.agent .badge + .badge::before { content: ", "; }
+.agent .window-body .app-body p { margin: 0 0 10px; }
+.agent .window-body p.kicker::after { content: ": "; }
+
+.agent .window-body p.chart-info,
+.agent .window-body p.chart-info[hidden] {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: #111;
+  background: none;
+  border: 0;
+}
+
+.agent .chart-legend { display: none; }
+
+.agent .examples,
+.agent .file-list {
+  margin: 12px 0;
+  padding-left: 22px;
+  list-style: disc;
+  border: 0;
+}
+
+.agent .examples li,
+.agent .file-list li { display: list-item; border: 0; }
+.agent .examples b { display: inline; padding: 0; font: inherit; font-weight: 700; color: #111; background: none; border: 0; }
+.agent .examples b::after { content: ": "; }
+.agent .examples span { display: inline; padding: 0; }
+
+.agent .file-list a {
+  display: inline;
+  padding: 0;
+  font-weight: 400;
+  color: #0645ad;
+  text-decoration: underline;
+  background: none;
+}
+
+.agent .button,
+.agent .button-primary {
+  display: inline;
+  min-height: 0;
+  margin-right: 16px;
+  padding: 0;
+  font: inherit;
+  color: #0645ad;
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.agent .hero-actions,
+.agent .app-actions { display: block; margin: 8px 0 0; padding: 0; }
+
+.agent .opp-card-meta { display: grid; padding-top: 8px; border-top: 1px solid #ddd; }
+.agent .opp-card-meta dt { color: #555; }
+
+.agent .site-footer {
+  display: block;
+  margin-top: 32px;
+  padding: 12px 0 0;
+  color: #555;
+  background: none;
+  border: 0;
+  border-top: 1px solid #ccc;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.agent .credit a { color: #0645ad; }
+
 /* ============================  RESPONSIVE  ============================ */
 @media (max-width: 900px) {
   .hero,
@@ -1575,6 +1877,7 @@ html.still { scroll-behavior: auto; }
   .menu,
   .clock { display: none; }
   .launch-btn { display: flex; }
+  .agent-btn { padding: 0 12px; }
 
   .window-body,
   .window-hero .window-body { padding: 24px 20px 26px; }

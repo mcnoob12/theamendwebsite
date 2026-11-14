@@ -38,6 +38,25 @@
     });
   }
 
+  /* ---- Agent view: plain text for AI agents ---- */
+  var agentBtn = document.getElementById('agent-toggle');
+  function setAgent(on, save) {
+    root.classList.toggle('agent', on);
+    if (agentBtn) agentBtn.setAttribute('aria-pressed', String(on));
+    if (save) { try { localStorage.setItem('amend-agent', on ? '1' : '0'); } catch (e) {} }
+  }
+  setAgent(root.classList.contains('agent'), false);
+  if (agentBtn) {
+    agentBtn.addEventListener('click', function () {
+      var on = !root.classList.contains('agent');
+      setAgent(on, true);
+      // Drop ?agent from the address so the saved choice wins on reload.
+      if (/[?&]agent\b/.test(location.search)) {
+        try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+      }
+    });
+  }
+
   /* ---- Info buttons: show or hide a short description ---- */
   document.querySelectorAll('.info-btn').forEach(function (btn) {
     var target = document.getElementById(btn.getAttribute('aria-controls'));

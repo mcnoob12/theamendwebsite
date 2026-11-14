@@ -7,8 +7,18 @@
     <meta name="description" content="Amend. — Technology, distinctly human.">
     <link rel="stylesheet" href="styles.css">
     <script>
+      // Agent view: a plain-text version of the page for AI agents.
+      // On with ?agent (or ?agent=1), off with ?agent=0, otherwise the saved choice.
+      try {
+        var q = new URLSearchParams(location.search).get('agent');
+        var agentOn = q !== null ? q !== '0' : localStorage.getItem('amend-agent') === '1';
+        if (agentOn) document.documentElement.classList.add('agent');
+      } catch (e) {}
+    </script>
+    <script>
       // Hide the hero window until the opening "zoom" animation runs.
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+          !document.documentElement.classList.contains('agent')) {
         document.documentElement.classList.add('zoom-pending');
       }
     </script>
@@ -48,6 +58,10 @@
         <a href="opportunities.html">Opportunities</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button type="button" class="agent-btn" id="agent-toggle" aria-pressed="false" title="Plain-text view for AI agents and screen readers">
+        <span class="agent-glyph" aria-hidden="true">{}</span>
+        Agent
+      </button>
       <button type="button" class="launch-btn" id="launch-btn" aria-expanded="false" aria-controls="launcher">
         <span class="launch-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         Launch
@@ -81,6 +95,8 @@
     </div>
 
     <main class="desktop" id="top">
+      <p class="agent-note">Agent view: a plain-text version of this page for AI agents and screen readers. Turn it off with the Agent button, or open the page with <code>?agent=0</code>.</p>
+
 
       <div class="hero">
         <section class="window window-hero" aria-labelledby="hero-title">
