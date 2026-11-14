@@ -5,41 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Opportunities archive — Amend.</title>
     <meta name="description" content="Opportunities archived by Amend.">
-    <link rel="preload" href="assets/fonts/ChicagoFLF.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="styles.css">
-    <script>
-      // Apply the saved appearance before first paint.
-      try {
-        var t = localStorage.getItem('amend-theme');
-        if (t === 'aqua' || t === 'aero') document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
-    </script>
   </head>
   <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="icon-folder-line" viewBox="0 0 32 26">
+        <path d="M1.5 4.5h10l3 3h16v17h-29z" fill="rgba(255,255,255,.18)" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="icon-console" viewBox="0 0 32 26">
+        <rect x="1.5" y="1.5" width="29" height="23" fill="rgba(255,255,255,.08)" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M7 9l4 3.5L7 16M13.5 17h7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="icon-archive" viewBox="0 0 32 26">
+        <rect x="1.5" y="1.5" width="29" height="7" fill="rgba(255,255,255,.08)" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M3.5 8.5v16h25v-16M12 13.5h8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+    </svg>
     <header class="menubar">
       <a class="brand" href="index.html" aria-label="Amend. home">
-        <img src="assets/logo-mac-small.png" alt="" width="80" height="25">
+        <img src="assets/logo-mac-small-dark.png" alt="" width="80" height="25">
       </a>
       <nav class="menu" aria-label="Primary navigation">
         <a href="index.html#who-we-are">Who we are</a>
+        <a href="index.html#ideas">Ideas</a>
+        <a href="index.html#mission">Mission</a>
         <a href="index.html#projects">Projects</a>
         <a href="opportunities.html" aria-current="page">Opportunities</a>
-        <a href="index.html#mission">Mission</a>
         <a href="index.html#contact">Contact</a>
       </nav>
-      <div class="theme-switch" role="group" aria-label="Appearance">
-        <button type="button" data-theme-choice="classic" aria-pressed="true">Classic</button>
-        <button type="button" data-theme-choice="aqua" aria-pressed="false">Aqua</button>
-        <button type="button" data-theme-choice="aero" aria-pressed="false">Aero</button>
-      </div>
+      <button type="button" class="launch-btn" id="launch-btn" aria-expanded="false" aria-controls="launcher">
+        <span class="launch-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        Launch
+      </button>
+      <span class="clock" id="clock" aria-hidden="true"></span>
     </header>
+
+    <div class="window launcher" id="launcher" role="dialog" aria-label="Launcher" hidden>
+      <div class="titlebar">
+        <span class="pixel pixel-green" aria-hidden="true"></span>
+        <span class="window-title">Applications</span>
+        <button type="button" class="winbtn" id="launcher-close" aria-label="Close launcher">&times;</button>
+      </div>
+      <nav class="tiles" aria-label="Launcher navigation">
+          <a class="tile" href="index.html#who-we-are"><span class="app-icon app-icon-green" aria-hidden="true">W</span><span>Who we are</span></a>
+          <a class="tile" href="index.html#ideas"><span class="app-icon app-icon-yellow" aria-hidden="true">I</span><span>Ideas</span></a>
+          <a class="tile" href="index.html#mission"><span class="app-icon app-icon-cyan" aria-hidden="true">M</span><span>Mission</span></a>
+          <a class="tile" href="index.html#projects"><span class="app-icon app-icon-purple" aria-hidden="true">P</span><span>Projects</span></a>
+          <a class="tile" href="opportunities.html" aria-current="page"><span class="app-icon app-icon-red" aria-hidden="true">O</span><span>Opportunities</span></a>
+          <a class="tile" href="index.html#contact"><span class="app-icon app-icon-green" aria-hidden="true">C</span><span>Contact</span></a>
+      </nav>
+    </div>
+
+    <nav class="desk-icons desk-icons-left" aria-label="Desktop shortcuts">
+      <a class="desk-icon" href="index.html#top"><svg aria-hidden="true"><use href="#icon-folder-line"/></svg><span>c:/amend</span></a>
+      <a class="desk-icon" href="index.html#projects"><svg aria-hidden="true"><use href="#icon-folder-line"/></svg><span>projects</span></a>
+    </nav>
+    <div class="desk-icons desk-icons-right">
+      <button type="button" class="desk-icon" data-open-controls><svg aria-hidden="true"><use href="#icon-console"/></svg><span>console</span></button>
+      <a class="desk-icon" href="opportunities.html"><svg aria-hidden="true"><use href="#icon-archive"/></svg><span>archive</span></a>
+    </div>
 
     <main class="desktop">
       <section class="window window-wide window-page" id="opportunities" aria-labelledby="opp-title">
         <div class="titlebar">
-          <span class="closebox" aria-hidden="true"></span>
+          <span class="pixel pixel-red" aria-hidden="true"></span>
           <h1 class="window-title" id="opp-title">Opportunities archive</h1>
-          <span class="zoombox zoombox-red" aria-hidden="true"></span>
+          <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
         <div class="window-body">
           <p class="lede">Opportunities, archived.</p>
@@ -55,14 +86,19 @@
         </div>
       </section>
 
-      <a class="back-link" href="index.html">Back to Amend.</a>
+      <a class="button back-link" href="index.html">&larr; Back to Amend.</a>
+
+      <footer class="site-footer">
+        <span class="credit">Background photo by <a href="https://unsplash.com/@sam_roy7093?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sam Roy</a> on <a href="https://unsplash.com/photos/abstract-geometric-shapes-illuminated-with-vibrant-blue-and-pink-light-0oF7ot00-8E?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+      </footer>
     </main>
 
     <dialog class="opp-dialog" id="opp-dialog" aria-labelledby="opp-dialog-title">
       <div class="dialog-frame">
         <div class="titlebar">
-          <button type="button" class="closebox" id="opp-dialog-close" aria-label="Close"></button>
+          <span class="pixel pixel-yellow" aria-hidden="true"></span>
           <span class="window-title" id="opp-dialog-title">Admin</span>
+          <button type="button" class="winbtn" id="opp-dialog-close" aria-label="Close">&times;</button>
         </div>
 
         <!-- Unlock: enter the admin password -->
@@ -130,22 +166,33 @@
       </div>
     </dialog>
 
-    <aside class="window controls" id="controls" aria-label="Control panel">
-      <div class="titlebar">
-        <button type="button" class="closebox" id="controls-cancel" aria-label="Minimize control panel" aria-expanded="true"></button>
-        <span class="window-title">Control Panel</span>
-      </div>
+    <aside class="sheet" id="controls" aria-label="Control panel">
+      <button type="button" class="sheet-handle" id="controls-toggle" aria-expanded="false" aria-controls="controls-body">
+        <span class="grabber" aria-hidden="true"></span>
+        <span class="sheet-label">Control Panel</span>
+      </button>
       <div class="controls-body" id="controls-body">
-        <label for="theme-color">Accent color
+        <div class="switches">
+          <button type="button" class="switch" id="opt-grid" aria-pressed="true">
+            <span class="switch-icon switch-icon-grid" aria-hidden="true"></span>Grid
+          </button>
+          <button type="button" class="switch" id="opt-text" aria-pressed="false">
+            <span class="switch-icon switch-icon-text" aria-hidden="true">A</span>Large text
+          </button>
+          <button type="button" class="switch" id="opt-motion" aria-pressed="false">
+            <span class="switch-icon switch-icon-motion" aria-hidden="true"></span>Still
+          </button>
+        </div>
+        <label for="theme-color">Button color
           <span class="control-row">
-            <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
-            <span class="control-value" id="theme-color-value">0&deg;</span>
+            <input type="range" id="theme-color" min="0" max="360" value="206" step="1">
+            <span class="control-value" id="theme-color-value">206&deg;</span>
           </span>
         </label>
         <label for="contrast">Contrast
           <span class="control-row">
-            <input type="range" id="contrast" min="50" max="200" value="100" step="1">
-            <span class="control-value" id="contrast-value">100%</span>
+            <input type="range" id="contrast" min="50" max="200" value="155" step="1">
+            <span class="control-value" id="contrast-value">155%</span>
           </span>
         </label>
         <label for="brightness">Desktop brightness
@@ -154,6 +201,7 @@
             <span class="control-value" id="brightness-value">100%</span>
           </span>
         </label>
+        <button type="button" class="button button-sm" id="opt-reset">Reset</button>
       </div>
     </aside>
 

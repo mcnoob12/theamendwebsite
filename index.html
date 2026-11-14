@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Amend.</title>
     <meta name="description" content="Amend. — Technology, distinctly human.">
-    <link rel="preload" href="assets/fonts/ChicagoFLF.woff" as="font" type="font/woff" crossorigin>
     <link rel="stylesheet" href="styles.css">
-    <script>
-      // Apply the saved appearance before first paint.
-      try {
-        var t = localStorage.getItem('amend-theme');
-        if (t === 'aqua' || t === 'aero') document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
-    </script>
     <script>
       // Hide the hero window until the opening "zoom" animation runs.
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -24,44 +16,82 @@
   <body>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
       <symbol id="icon-doc" viewBox="0 0 16 20">
-        <path d="M1 1h9l5 5v13H1z" fill="#fff" stroke="#000" stroke-width="2"/>
-        <path d="M10 1v5h5" fill="none" stroke="#000" stroke-width="2"/>
+        <path d="M1.5 1.5h8l5 5v12h-13z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M9.5 1.5v5h5" fill="none" stroke="currentColor" stroke-width="2"/>
       </symbol>
       <symbol id="icon-folder" viewBox="0 0 20 16">
-        <path d="M1 3h6l2 2h10v10H1z" fill="#fff" stroke="#000" stroke-width="2"/>
-        <path d="M1 7h18" fill="none" stroke="#000" stroke-width="2"/>
+        <path d="M1.5 2.5h6l2 2h9v10h-17z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M1.5 7h17" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="icon-folder-line" viewBox="0 0 32 26">
+        <path d="M1.5 4.5h10l3 3h16v17h-29z" fill="rgba(255,255,255,.18)" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="icon-console" viewBox="0 0 32 26">
+        <rect x="1.5" y="1.5" width="29" height="23" fill="rgba(255,255,255,.08)" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M7 9l4 3.5L7 16M13.5 17h7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="icon-archive" viewBox="0 0 32 26">
+        <rect x="1.5" y="1.5" width="29" height="7" fill="rgba(255,255,255,.08)" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M3.5 8.5v16h25v-16M12 13.5h8" fill="none" stroke="currentColor" stroke-width="1.5"/>
       </symbol>
     </svg>
 
     <header class="menubar">
       <a class="brand" href="#top" aria-label="Amend. home">
-        <img src="assets/logo-mac-small.png" alt="" width="80" height="25">
+        <img src="assets/logo-mac-small-dark.png" alt="" width="80" height="25">
       </a>
       <nav class="menu" aria-label="Primary navigation">
         <a href="#who-we-are">Who we are</a>
+        <a href="#ideas">Ideas</a>
+        <a href="#mission">Mission</a>
         <a href="#projects">Projects</a>
         <a href="opportunities.html">Opportunities</a>
-        <a href="#mission">Mission</a>
         <a href="#contact">Contact</a>
       </nav>
-      <div class="theme-switch" role="group" aria-label="Appearance">
-        <button type="button" data-theme-choice="classic" aria-pressed="true">Classic</button>
-        <button type="button" data-theme-choice="aqua" aria-pressed="false">Aqua</button>
-        <button type="button" data-theme-choice="aero" aria-pressed="false">Aero</button>
-      </div>
+      <button type="button" class="launch-btn" id="launch-btn" aria-expanded="false" aria-controls="launcher">
+        <span class="launch-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        Launch
+      </button>
+      <span class="clock" id="clock" aria-hidden="true"></span>
     </header>
+
+    <div class="window launcher" id="launcher" role="dialog" aria-label="Launcher" hidden>
+      <div class="titlebar">
+        <span class="pixel pixel-green" aria-hidden="true"></span>
+        <span class="window-title">Applications</span>
+        <button type="button" class="winbtn" id="launcher-close" aria-label="Close launcher">&times;</button>
+      </div>
+      <nav class="tiles" aria-label="Launcher navigation">
+          <a class="tile" href="#who-we-are"><span class="app-icon app-icon-green" aria-hidden="true">W</span><span>Who we are</span></a>
+          <a class="tile" href="#ideas"><span class="app-icon app-icon-yellow" aria-hidden="true">I</span><span>Ideas</span></a>
+          <a class="tile" href="#mission"><span class="app-icon app-icon-cyan" aria-hidden="true">M</span><span>Mission</span></a>
+          <a class="tile" href="#projects"><span class="app-icon app-icon-purple" aria-hidden="true">P</span><span>Projects</span></a>
+          <a class="tile" href="opportunities.html"><span class="app-icon app-icon-red" aria-hidden="true">O</span><span>Opportunities</span></a>
+          <a class="tile" href="#contact"><span class="app-icon app-icon-green" aria-hidden="true">C</span><span>Contact</span></a>
+      </nav>
+    </div>
+
+    <nav class="desk-icons desk-icons-left" aria-label="Desktop shortcuts">
+      <a class="desk-icon" href="#top"><svg aria-hidden="true"><use href="#icon-folder-line"/></svg><span>c:/amend</span></a>
+      <a class="desk-icon" href="#projects"><svg aria-hidden="true"><use href="#icon-folder-line"/></svg><span>projects</span></a>
+    </nav>
+    <div class="desk-icons desk-icons-right">
+      <button type="button" class="desk-icon" data-open-controls><svg aria-hidden="true"><use href="#icon-console"/></svg><span>console</span></button>
+      <a class="desk-icon" href="opportunities.html"><svg aria-hidden="true"><use href="#icon-archive"/></svg><span>archive</span></a>
+    </div>
 
     <main class="desktop" id="top">
 
       <div class="hero">
         <section class="window window-hero" aria-labelledby="hero-title">
           <div class="titlebar">
-            <span class="closebox" aria-hidden="true"></span>
+            <span class="pixel pixel-green" aria-hidden="true"></span>
             <span class="window-title">Amend.</span>
+            <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
           </div>
           <div class="window-body">
             <h1 class="hero-logo" id="hero-title">
-              <img src="assets/logo-mac.png" alt="Amend." width="1600" height="492">
+              <img src="assets/logo-mac-dark.png" alt="Amend." width="1600" height="492">
             </h1>
             <p class="hero-subtitle">Technology, distinctly human.</p>
             <div class="hero-actions">
@@ -69,164 +99,311 @@
               <a class="button" href="#contact">Get in touch</a>
             </div>
           </div>
+          <div class="statusbar" aria-hidden="true"><span>Amend OS</span><span>Ready</span></div>
         </section>
 
-        <figure class="window window-chart" aria-label="Chart: values versus human-centered systems">
-          <div class="titlebar">
-            <span class="closebox" aria-hidden="true"></span>
-            <span class="window-title">Values chart</span>
-            <span class="zoombox zoombox-cyan" aria-hidden="true"></span>
+        <div class="hero-side">
+          <div class="window window-cube" aria-hidden="true">
+            <div class="titlebar">
+              <span class="pixel pixel-purple"></span>
+              <span class="window-title">render.obj</span>
+              <span class="winbtns"><i></i><i></i><i></i></span>
+            </div>
+            <div class="cube-stage">
+              <div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <p class="cube-caption">ideas, rendered<span class="caret"></span></p>
           </div>
-          <div class="window-body chart-body">
-            <svg class="chart" viewBox="0 0 420 300" aria-hidden="true">
-              <defs>
-                <pattern id="dither" width="4" height="4" patternUnits="userSpaceOnUse">
-                  <rect width="2" height="2" fill="#000"/>
-                  <rect x="2" y="2" width="2" height="2" fill="#000"/>
-                </pattern>
-              </defs>
-              <g class="chart-ticks">
-                <line x1="40" y1="60" x2="46" y2="60"/><line x1="40" y1="120" x2="46" y2="120"/>
-                <line x1="40" y1="180" x2="46" y2="180"/><line x1="40" y1="240" x2="46" y2="240"/>
-                <line x1="110" y1="270" x2="110" y2="276"/><line x1="180" y1="270" x2="180" y2="276"/>
-                <line x1="250" y1="270" x2="250" y2="276"/><line x1="320" y1="270" x2="320" y2="276"/>
-              </g>
-              <path class="chart-axis" d="M46 20 V270 H400"/>
-              <path class="chart-line chart-line-human" d="M46 270 H112 V210 H176 V180 H240 V138 H288 V111 H336 V97 H392"/>
-              <path class="chart-line chart-line-values" d="M46 270 H96 V262 H144 V234 H166 V190 H186 V152 H204 V90 H216 V40"/>
-            </svg>
-            <figcaption class="chart-legend">
-              <span><span class="swatch swatch-values"></span>Values</span>
-              <span><span class="swatch swatch-human"></span>Human-centered systems</span>
-            </figcaption>
-          </div>
-        </figure>
+          <figure class="window window-chart" aria-label="Chart: values versus human-centered systems, and the point of crisis where they part">
+            <div class="titlebar">
+              <span class="pixel pixel-cyan" aria-hidden="true"></span>
+              <span class="window-title">point_of_crisis.chart</span>
+              <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
+            </div>
+            <div class="window-body chart-body">
+              <svg class="chart" viewBox="0 0 420 300" aria-hidden="true">
+                <defs>
+                  <linearGradient id="chart-human-fill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" class="chart-stop-top"/>
+                    <stop offset="1" class="chart-stop-bottom"/>
+                  </linearGradient>
+                  <pattern id="chart-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                    <line x1="0" y1="0" x2="0" y2="6" class="chart-hatch-line"/>
+                  </pattern>
+                </defs>
+                <g class="chart-grid">
+                  <line x1="46" y1="60" x2="400" y2="60"/><line x1="46" y1="120" x2="400" y2="120"/>
+                  <line x1="46" y1="180" x2="400" y2="180"/><line x1="46" y1="240" x2="400" y2="240"/>
+                </g>
+                <g class="chart-ticks">
+                  <line x1="40" y1="60" x2="46" y2="60"/><line x1="40" y1="120" x2="46" y2="120"/>
+                  <line x1="40" y1="180" x2="46" y2="180"/><line x1="40" y1="240" x2="46" y2="240"/>
+                  <line x1="110" y1="270" x2="110" y2="276"/><line x1="180" y1="270" x2="180" y2="276"/>
+                  <line x1="250" y1="270" x2="250" y2="276"/><line x1="320" y1="270" x2="320" y2="276"/>
+                </g>
+                <path class="chart-area" d="M46 270 H112 V210 H176 V180 H240 V138 H288 V111 H336 V97 H392 V270 Z"/>
+                <path class="chart-gap" d="M166 210 V190 H186 V152 H204 V90 H216 V180 H176 V210 Z"/>
+                <line class="chart-crisis-line" x1="166" y1="24" x2="166" y2="270"/>
+                <path class="chart-axis" d="M46 20 V270 H400"/>
+                <text class="chart-label" x="52" y="30">growth</text>
+                <text class="chart-label" x="400" y="292" text-anchor="end">time &rarr;</text>
+                <path class="chart-line chart-line-human" pathLength="1" d="M46 270 H112 V210 H176 V180 H240 V138 H288 V111 H336 V97 H392"/>
+                <path class="chart-line chart-line-values" pathLength="1" d="M46 270 H96 V262 H144 V234 H166 V190 H186 V152 H204 V90 H216 V40"/>
+                <rect class="chart-crisis-pulse" x="160" y="204" width="12" height="12"/>
+                <rect class="chart-crisis" x="161" y="205" width="10" height="10"/>
+                <text class="chart-label chart-label-crisis" x="176" y="250">point of crisis</text>
+              </svg>
+              <figcaption class="chart-legend">
+                <span><span class="swatch swatch-values"></span>Values</span>
+                <span><span class="swatch swatch-human"></span>Human-centered systems</span>
+                <button type="button" class="info-btn" aria-expanded="false" aria-controls="chart-info" aria-label="What does this chart show?">i</button>
+              </figcaption>
+              <p class="chart-info" id="chart-info" hidden>Both lines start flat. At the point of crisis, values shoot up almost vertically, while human-centered systems keep climbing at their own slow pace. The gap that opens between them is the space we want to build in.</p>
+            </div>
+          </figure>
+        </div>
       </div>
 
       <section class="window" id="who-we-are" aria-labelledby="who-title">
         <div class="titlebar">
-          <span class="closebox" aria-hidden="true"></span>
+          <span class="pixel pixel-green" aria-hidden="true"></span>
           <h2 class="window-title" id="who-title">Who we are</h2>
-          <span class="zoombox zoombox-green" aria-hidden="true"></span>
+          <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
         <div class="window-body">
+          <p class="kicker">About</p>
           <p class="lede">An idealistic and dreamy Future Technology Corporation.</p>
-          <p>Amend. is forming around the belief that useful technology should feel clear, thoughtful, and close to real human needs.</p>
-          <p>We're a small team right now, trying to make a change in this world. Maybe we'll succeed, maybe we won't.</p>
+          <p>Amend. is a small, independent team building technology around one question: what would this look like if it were made for the person using it, rather than for whoever profits from them?</p>
+          <p>Right now that means a handful of projects. One helps fans of the same niche find each other nearby. One lets websites use the AI running on your own computer. One looks for connections between ideas from fields that never talk to each other. Some are live, some are experiments, and we keep them free wherever we can.</p>
+          <p>The way we build matters as much as what we build: private by default, clear about how things work, and honest about the people whose work and data make it possible.</p>
+          <p>We're early, and we're trying to make a real change. Maybe we'll succeed, maybe we won't.</p>
           <p class="signoff">Time will tell.</p>
+        </div>
+      </section>
+
+      <div class="row">
+        <section class="window" id="ideas" aria-labelledby="ideas-title">
+          <div class="titlebar">
+            <span class="pixel pixel-yellow" aria-hidden="true"></span>
+            <h2 class="window-title" id="ideas-title">Ideas</h2>
+            <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+          <div class="window-body">
+            <p class="kicker">Now</p>
+            <p class="lede">Today, the most important thing is an idea.</p>
+            <p>Making things has never been cheaper. Code gets written in an afternoon, a prototype ships in a weekend, and a machine will draft almost anything you ask it for.</p>
+            <p>What hasn't gotten cheaper is knowing what's worth making. Noticing a real need, or seeing that two things nobody put together belong together: that's the scarce part now. So that's where we put our time.</p>
+          </div>
+        </section>
+
+        <section class="window" id="belief" aria-labelledby="belief-title">
+          <div class="titlebar">
+            <span class="pixel pixel-purple" aria-hidden="true"></span>
+            <h2 class="window-title" id="belief-title">What we believe</h2>
+            <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+          <div class="window-body">
+            <p class="kicker">Belief</p>
+            <p class="lede">Powerful technology should be available to everyone.</p>
+            <p>Not only to whoever can pay the most, and never at the expense of the people inside it. Every system has humans behind it: the people who use it, the people whose work and data it runs on, and the people it leaves out.</p>
+            <p>We try to build for all of them. For example:</p>
+            <ul class="examples">
+              <li><b>NicheNet</b><span>Free and non-commercial. Your exact location never leaves your phone.</span></li>
+              <li><b>LocalLink</b><span>If your computer can run an AI model, the choice of model stays yours.</span></li>
+              <li><b>Derivative</b><span>Every new idea keeps a record of the people and ideas it came from.</span></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <section class="window" id="mission" aria-labelledby="mission-title">
+        <div class="titlebar">
+          <span class="pixel pixel-purple" aria-hidden="true"></span>
+          <h2 class="window-title" id="mission-title">Mission</h2>
+          <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <div class="window-body">
+          <p class="lede">Technology, with people kept at the center.</p>
+          <p>Our mission is simple: to amend how technology is imagined, designed and experienced, so that it serves people with more care.</p>
+          <p>Too much of big tech treats people as the product. We want to be the alternative: driven by values instead of greed, private by design, and built for the people who actually use it.</p>
         </div>
       </section>
 
       <section class="window" id="projects" aria-labelledby="projects-title">
         <div class="titlebar">
-          <span class="closebox" aria-hidden="true"></span>
+          <span class="pixel pixel-yellow" aria-hidden="true"></span>
           <h2 class="window-title" id="projects-title">Projects</h2>
-          <span class="zoombox zoombox-yellow" aria-hidden="true"></span>
+          <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
         <div class="window-body">
           <p class="lede">Ideas in motion.</p>
-          <div class="folder">
-            <div class="folder-head">
-              <h3>Project CTW: Connect The World</h3>
-              <span class="folder-note">Free, in-depth guides</span>
-            </div>
+          <div class="apps">
+
+            <article class="app" aria-labelledby="nn-title">
+              <div class="app-head">
+                <span class="app-icon app-icon-purple" aria-hidden="true">N</span>
+                <div>
+                  <h3 class="app-name" id="nn-title">NicheNet</h3>
+                  <span class="app-meta">nn.amend.co.in</span>
+                </div>
+                <span class="badges"><span class="badge badge-dark">Alpha</span><span class="badge badge-ai" title="Built with help from AI tools">AI-assisted</span></span>
+              </div>
+              <div class="app-body">
+                <p>Find people near you who love the same niche things you do, like a small artist such as Jamie Paige. Pick your niches or import them from Last.fm, see how many fans live in your neighbourhood, city, state or country, and join the group chat for that niche and area.</p>
+                <p>You choose how precisely your area is shared. It's free, and built only to help fans connect.</p>
+                <div class="app-actions">
+                  <a class="button button-primary button-sm" href="https://nn.amend.co.in">Open NicheNet</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="app" aria-labelledby="ll-title">
+              <div class="app-head">
+                <span class="app-icon app-icon-cyan" aria-hidden="true">L</span>
+                <div>
+                  <h3 class="app-name" id="ll-title">LocalLink</h3>
+                  <span class="app-meta">kalaris-locallink</span>
+                </div>
+                <span class="badges"><span class="badge">v0.1</span><span class="badge badge-ai" title="Built with help from AI tools">AI-assisted</span></span>
+              </div>
+              <div class="app-body">
+                <p>A protocol that lets websites use AI models running on your own computer. Choose "Local model" on a site, approve it once, and it can talk to your models in Ollama, LM Studio, llama.cpp, Jan or any OpenAI-compatible server.</p>
+                <p>If you have the hardware, you get the choice, and your conversations stay on your machine.</p>
+                <div class="app-actions">
+                  <span class="app-note">Open protocol, MIT licensed</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="app" aria-labelledby="dv-title">
+              <div class="app-head">
+                <span class="app-icon app-icon-yellow" aria-hidden="true">D</span>
+                <div>
+                  <h3 class="app-name" id="dv-title">Derivative</h3>
+                  <span class="app-meta">Discovery engine</span>
+                </div>
+                <span class="badges"><span class="badge">Test build</span><span class="badge badge-ai" title="Built with help from AI tools">AI-assisted</span></span>
+              </div>
+              <div class="app-body">
+                <p>Finds structural connections between ideas developed independently in different fields, like counterpoint in music and concurrent processes in computing, and shows where each one came from.</p>
+                <p>It's built as an honest test: if connections from a shared pool of ideas don't beat brainstorming alone with an AI, the thesis fails, and that's worth knowing too.</p>
+                <div class="app-actions">
+                  <span class="app-note">In development</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="app" aria-labelledby="ctw-title">
+              <div class="app-head">
+                <span class="app-icon app-icon-green" aria-hidden="true">C</span>
+                <div>
+                  <h3 class="app-name" id="ctw-title">Project CTW</h3>
+                  <span class="app-meta">Connect The World</span>
+                </div>
+                <span class="badge badge-dark">Live</span>
+              </div>
+              <div class="app-body">
+                <p>Free, in-depth guides for students working through the things nobody explains properly.</p>
+                <ul class="file-list">
+                  <li>
+                    <a href="https://dusty-workshop-b12.notion.site/Walking-you-through-US-college-Apps-3c3656469ba28035abadd67458f427ac?pvs=74">
+                      <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                      <span>Walking you through US College Applications</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://dusty-workshop-b12.notion.site/Transitioning-to-the-SAT-as-a-JEE-Aspirant-3c0656469ba280358d7bc47eb70c6521?pvs=73">
+                      <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                      <span>Transitioning to the SAT as a JEE Aspirant</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+          </div>
+        </div>
+        <div class="statusbar" aria-hidden="true"><span>4 items</span><span>2 live</span></div>
+      </section>
+
+      <div class="row">
+        <section class="window" id="opportunities" aria-labelledby="opp-title">
+          <div class="titlebar">
+            <span class="pixel pixel-red" aria-hidden="true"></span>
+            <h2 class="window-title" id="opp-title">Opportunities archive</h2>
+            <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+          <div class="window-body">
+            <p class="lede">Opportunities, archived.</p>
             <ul class="file-list">
               <li>
-                <a href="https://dusty-workshop-b12.notion.site/Walking-you-through-US-college-Apps-3c3656469ba28035abadd67458f427ac?pvs=74">
-                  <svg class="doc-icon"><use href="#icon-doc"/></svg>
-                  <span>Walking you through US College Applications</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://dusty-workshop-b12.notion.site/Transitioning-to-the-SAT-as-a-JEE-Aspirant-3c0656469ba280358d7bc47eb70c6521?pvs=73">
-                  <svg class="doc-icon"><use href="#icon-doc"/></svg>
-                  <span>Transitioning to the SAT as a JEE Aspirant</span>
+                <a href="opportunities.html">
+                  <svg class="doc-icon folder-icon"><use href="#icon-folder"/></svg>
+                  <span>Open the opportunities archive</span>
                 </a>
               </li>
             </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="window" id="opportunities" aria-labelledby="opp-title">
-        <div class="titlebar">
-          <span class="closebox" aria-hidden="true"></span>
-          <h2 class="window-title" id="opp-title">Opportunities archive</h2>
-          <span class="zoombox zoombox-red" aria-hidden="true"></span>
-        </div>
-        <div class="window-body">
-          <p class="lede">Opportunities, archived.</p>
-          <ul class="file-list">
-            <li>
-              <a href="opportunities.html">
-                <svg class="doc-icon folder-icon"><use href="#icon-folder"/></svg>
-                <span>Open the opportunities archive</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="window" id="mission" aria-labelledby="mission-title">
-        <div class="titlebar">
-          <span class="closebox" aria-hidden="true"></span>
-          <h2 class="window-title" id="mission-title">Mission</h2>
-          <span class="zoombox zoombox-purple" aria-hidden="true"></span>
-        </div>
-        <div class="window-body">
-          <p class="lede">Technology, with people kept at the center.</p>
-          <p>The mission is simple: Amend. the way technology is imagined, designed, and experienced so it serves people with more care.</p>
-          <p>We aspire to be the anti corporate-greed, privacy centric, and value driven alternative to big tech.</p>
-        </div>
-      </section>
-
-      <section class="window" id="contact" aria-labelledby="contact-title">
-        <div class="titlebar">
-          <span class="closebox" aria-hidden="true"></span>
-          <h2 class="window-title" id="contact-title">Contact</h2>
-          <span class="zoombox zoombox-green" aria-hidden="true"></span>
-        </div>
-        <div class="window-body">
-          <p class="lede">Tell us more.</p>
-          <ul class="file-list">
-            <li>
-              <a href="https://www.linkedin.com/company/amend-project/">
-                <svg class="doc-icon"><use href="#icon-doc"/></svg>
-                <span>LinkedIn</span>
-              </a>
-            </li>
-            <li>
-              <a href="mailto:aryankrjha.1235@gmail.com">
-                <svg class="doc-icon"><use href="#icon-doc"/></svg>
-                <span>E-mail</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <section class="window" id="contact" aria-labelledby="contact-title">
+          <div class="titlebar">
+            <span class="pixel pixel-green" aria-hidden="true"></span>
+            <h2 class="window-title" id="contact-title">Contact</h2>
+            <span class="winbtns" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+          <div class="window-body">
+            <p class="lede">Tell us more.</p>
+            <ul class="file-list">
+              <li>
+                <a href="https://www.linkedin.com/company/amend-project/">
+                  <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                  <span>LinkedIn</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:aryankrjha.1235@gmail.com">
+                  <svg class="doc-icon"><use href="#icon-doc"/></svg>
+                  <span>E-mail</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
 
       <footer class="site-footer">
-        <a href='http://www.freevisitorcounters.com'>User Counter</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=dabf2716cbe0118328e2a42e18aaba85140b905e'></script>
-<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1632370/t/5"></script>
+        <span class="credit">Background photo by <a href="https://unsplash.com/@sam_roy7093?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sam Roy</a> on <a href="https://unsplash.com/photos/abstract-geometric-shapes-illuminated-with-vibrant-blue-and-pink-light-0oF7ot00-8E?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
       </footer>
     </main>
 
-    <aside class="window controls" id="controls" aria-label="Control panel">
-      <div class="titlebar">
-        <button type="button" class="closebox" id="controls-cancel" aria-label="Minimize control panel" aria-expanded="true"></button>
-        <span class="window-title">Control Panel</span>
-      </div>
+    <aside class="sheet" id="controls" aria-label="Control panel">
+      <button type="button" class="sheet-handle" id="controls-toggle" aria-expanded="false" aria-controls="controls-body">
+        <span class="grabber" aria-hidden="true"></span>
+        <span class="sheet-label">Control Panel</span>
+      </button>
       <div class="controls-body" id="controls-body">
-        <label for="theme-color">Accent color
+        <div class="switches">
+          <button type="button" class="switch" id="opt-grid" aria-pressed="true">
+            <span class="switch-icon switch-icon-grid" aria-hidden="true"></span>Grid
+          </button>
+          <button type="button" class="switch" id="opt-text" aria-pressed="false">
+            <span class="switch-icon switch-icon-text" aria-hidden="true">A</span>Large text
+          </button>
+          <button type="button" class="switch" id="opt-motion" aria-pressed="false">
+            <span class="switch-icon switch-icon-motion" aria-hidden="true"></span>Still
+          </button>
+        </div>
+        <label for="theme-color">Button color
           <span class="control-row">
-            <input type="range" id="theme-color" min="0" max="360" value="0" step="1">
-            <span class="control-value" id="theme-color-value">0&deg;</span>
+            <input type="range" id="theme-color" min="0" max="360" value="206" step="1">
+            <span class="control-value" id="theme-color-value">206&deg;</span>
           </span>
         </label>
         <label for="contrast">Contrast
           <span class="control-row">
-            <input type="range" id="contrast" min="50" max="200" value="100" step="1">
-            <span class="control-value" id="contrast-value">100%</span>
+            <input type="range" id="contrast" min="50" max="200" value="155" step="1">
+            <span class="control-value" id="contrast-value">155%</span>
           </span>
         </label>
         <label for="brightness">Desktop brightness
@@ -235,6 +412,7 @@
             <span class="control-value" id="brightness-value">100%</span>
           </span>
         </label>
+        <button type="button" class="button button-sm" id="opt-reset">Reset</button>
       </div>
     </aside>
 
