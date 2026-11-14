@@ -39,8 +39,8 @@
   --line: 1px solid var(--border);
   --shadow: 0 24px 70px rgba(0, 0, 0, .5);
 
-  --font-system: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
-  --font-body: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font-system: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-body: "Geist", "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -349,9 +349,9 @@ button.winbtn:focus-visible { outline-offset: 1px; }
 .lede {
   margin: 0 0 20px;
   font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -.025em;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.035em;
   color: #fff;
 }
 
@@ -412,9 +412,9 @@ button.winbtn:focus-visible { outline-offset: 1px; }
 .window-body p.hero-subtitle {
   margin: 0 0 32px;
   font-size: clamp(34px, 5.4vw, 64px);
-  font-weight: 900;
-  line-height: .98;
-  letter-spacing: -.035em;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.045em;
   color: #fff;
 }
 
@@ -834,7 +834,7 @@ button.winbtn:focus-visible { outline-offset: 1px; }
 .app-name {
   margin: 0;
   font-size: 23px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: -.02em;
   color: #fff;
